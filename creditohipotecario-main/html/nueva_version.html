@@ -1,0 +1,1464 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet"
+    href="../libraries/bootstrap-5.0.0-beta3-dist/css/bootstrap.min.css">
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/11.0.2/css/bootstrap-slider.min.css"
+    integrity="sha512-3q8fi8M0VS+X/3n64Ndpp6Bit7oXSiyCnzmlx6IDBLGlY5euFySyJ46RUlqIVs0DPCGOypqP8IRk/EyPvU28mQ=="
+    crossorigin="anonymous" />
+  <link rel="stylesheet"
+    href="../libraries/fontawesome-free-5.15.3-web/css/all.min.css">
+  <link rel="stylesheet" href="../css/main.css">
+</head>
+
+<body class="d-flex flex-column h-100 body">
+  <div class="d-lg-none d-xl-none d-xxl-none">
+    <nav class="navbar navbar-light">
+      <div class="container-fluid">
+        <a class="navbar-brand navbar__link" href="#">
+          <img src="../img/logo.png" alt="" height="40">
+        </a>
+        <div class="d-flex">
+          <button class="btn" type="submit"><i
+              class="fas fa-bars"></i></button>
+        </div>
+      </div>
+    </nav>
+    <div
+      class="home container flex-grow-1 d-flex flex-column">
+      <div class="title mb-4">
+        <h3 class="text-dark"><span
+            class="text-muted">SIMULADOR DE</span>
+          CR&Eacute;DITO
+          HIPOTECARIO</h3>
+      </div>
+
+      <div id="tipo-credito-container"
+        class="cards-container">
+        <div class="row mb-4">
+          <div class="col card"
+            onclick="handleTipoDeCreditoButton('costo-casa')">
+            <img src="../img/comprar_casa.svg"
+              class="card-img-top card__image" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">COMPRAR CASA</h5>
+            </div>
+          </div>
+          <div class="col card"
+            onclick="handleTipoDeCreditoButton('costo-terreno')">
+            <img src="../img/comprar_terreno.svg"
+              class="card-img-top card__image" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">ELEGIR TERRENO</h5>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col card"
+            onclick="handleTipoDeCreditoButton('valor-casa-liquidez')">
+            <img src="../img/obtener_liquidez.svg"
+              class="card-img-top card__image" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">OBTENER LIQUIDEZ</h5>
+            </div>
+          </div>
+          <div class="col card"
+            onclick="handleTipoDeCreditoButton('valor-casa')">
+            <img src="../img/refinanciar.svg"
+              class="card-img-top card__image" alt="...">
+            <div class="card-body">
+              <h5 class="card-title">REFINANCIAR</h5>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="valor-proiedad-container">
+        <h6 id="valor-propiedad__label"
+          class="text-muted text-center mb-3"></h6>
+        <div class="card mb-4">
+          <div class="card-body" id="valor-propiedad-text">
+          </div>
+        </div>
+        <div class="slider-container">
+          <input type="range" class="form-range slider" id="valor-propiedad-slider" value="0">
+        </div>
+        <div
+          class="d-flex justify-content-between text-muted min-max-container">
+          <div>MIN 500,000</div>
+          <div>MAX 10,000,000</div>
+        </div>
+        <div class="conoce-valor-inmueble-container d-flex">
+          <div id="estimar-valor__fill"></div>
+          <div id="estimar-valor__container">
+            <div class="conocer-valor-inmuebe__title">CONOCE
+              EL VALOR DE TU INMUEBLE!</div>
+            <div class="conocer-valor-inmuebe__subtitle">
+              Usando inteligencia artificial</div>
+            <button type="button"
+              class="btn btn-primary conocer-valor-inmuebe__button"
+              onclick="mostrarEstimarValorModal()">Estimar
+              Valor</button>
+          </div>
+          <div><img src="../img/valuar.svg" alt="valuar">
+          </div>
+        </div>
+        <div class="confirm-button mt-auto mb-3">
+          <button type="button"
+            class="btn btn-primary btn-lg"
+            onclick="handleConfirmarValorPropiedad()">CONFIRMAR</button>
+        </div>
+      </div>
+
+      <div id="main-form">
+        <h6 class="text-muted text-center mb-3">Valor del
+          inmueble</h6>
+        <div class="card mb-4">
+          <div class="card-body"
+            id="main-form-valor-propiedad"></div>
+        </div>
+        <div id="comprar-casa__form">
+          <div class="mb-3 px-3">
+            <label for="opcion-de-simulacion__select"
+              class="form-label">Elige el modo para
+              calcular</label>
+            <select id="opcion-de-simulacion__select"
+              class="form-select">
+              <option value="costo-casa" selected>Valor de
+                la casa</option>
+              <option value="monto-que-necesitas">Monto que
+                necesitas</option>
+              <option value="mensualidad-que-quieres">
+                Mensualidad que quieres</option>
+            </select>
+          </div>
+          <div id="comprar-casa-monto-que-necesitas"
+            class="mb-3 px-3">
+            <label id="comprar-terreno-cantidad__label"
+              for="costo-terreno" class="form-label">¿Cuánto
+              necesitas?</label>
+            <input type="text" class="form-control"
+              id="costo-terreno"
+              placeholder="Ingresa cantidad">
+          </div>
+          <div id="comprar-casa-mensualidad-que-necesitas">
+            <div class="mb-3 px-3">
+              <label id="comprar-terreno-cantidad__label"
+                for="costo-terreno" class="form-label">¿Que
+                mensualidad quieres pagar?</label>
+              <input type="text" class="form-control"
+                id="costo-terreno"
+                placeholder="Ingresa cantidad">
+            </div>
+            <div class="mb-3 px-3">
+              <label id="comprar-terreno-cantidad__label"
+                for="costo-terreno"
+                class="form-label">Ingreso mensual
+                neto</label>
+              <input type="text" class="form-control"
+                id="costo-terreno"
+                placeholder="Ingresa cantidad">
+            </div>
+          </div>
+          <div id="enganche-financiamiento-container">
+            <div id="financiamiento-slider__container"
+              class="slider-container enganche-financiamiento-slider">
+              <input type="range" class="form-range slider"
+                id="comprar-casa-enganche-slider" value="0">
+            </div>
+            <div id="cofinanciamiento-slider__container"
+              class="slider-container enganche-financiamiento-slider slider-container enganche-financiamiento-slider--range"
+              style="display: none;">
+              <input type="range" class="form-range slider"
+                id="comprar-casa-cofinanciamiento-slider"
+                value="0">
+            </div>
+            <div class="mb-4"></div>
+            <div class="comprar-casa__input-group">
+              <div
+                class="comprar-casa__label comprar-casa__label--dark">
+                <div class="bullet"></div>
+                <div>Enganche</div>
+              </div>
+              <input type="text" class="form-control mb-3"
+                id="comprar-casa-porcentaje-enganche"
+                aria-label="porcentaje enganche"
+                name="porcentaje-enganche" value="20%">
+              <input type="text" class="form-control"
+                id="comprar-casa-valor-enganche"
+                aria-label="valor enganche"
+                name="valor-enganche">
+            </div>
+            <div class="mb-4"></div>
+            <div class="comprar-casa__input-group mb-4">
+              <div class="comprar-casa__label">
+                <div class="bullet"></div>
+                <div>Financiamiento</div>
+              </div>
+              <input type="text" class="form-control mb-3"
+                id="comprar-casa-porcentaje-financiamiento"
+                aria-label="porcentaje enganche"
+                name="porcentaje-enganche" value="80%">
+              <input type="text" class="form-control"
+                id="comprar-casa-valor-financiamiento"
+                aria-label="valor enganche"
+                name="valor-enganche">
+            </div>
+            <div class="mb-4"></div>
+            <div class="comprar-casa__input-group mb-4">
+              <div
+                class="comprar-casa__label comprar-casa__label--grey">
+                <div class="bullet"></div>
+                <div>Cofinanciamiento</div>
+                <button id="cofinanciamiento__toggle"
+                  type="button"
+                  class="mx-3 btn btn-sm text-grey"
+                  onclick="toggleCofinanciamiento()">
+                  <i class="fas fa-plus"></i>
+                </button>
+              </div>
+              <div id="cofinanciamiento__form"
+                style="display: none;">
+                <select
+                  id="comprar-casa-cofinanciamiento__select"
+                  class="form-select mb-3">
+                  <option value="infonavit" selected>
+                    Infonavit</option>
+                  <option value="coinfonavit">Cofinavit
+                  </option>
+                  <option value="otro">Otro</option>
+                </select>
+                <input type="text" class="form-control mb-3"
+                  id="comprar-casa-porcentaje-cofinanciamiento"
+                  aria-label="porcentaje enganche"
+                  name="porcentaje-enganche" value="30%">
+                <input type="text" class="form-control"
+                  id="comprar-casa-valor-cofinanciamiento"
+                  aria-label="valor enganche"
+                  name="valor-enganche">
+              </div>
+
+            </div>
+          </div>
+          <div class="mb-3">
+            <h5 class="text-muted text-center">&iquest;A
+              cu&aacute;ntos a&ntilde;os quieres pagar?</h5>
+            <div class="mb-4"></div>
+            <div
+              class="d-flex text-muted text-center numero-años-container">
+              <div onclick="updateYearPayments(this, 5)">5
+              </div>
+              <div onclick="updateYearPayments(this, 10)">10
+              </div>
+              <div onclick="updateYearPayments(this, 15)">15
+              </div>
+              <div onclick="updateYearPayments(this, 20)">20
+              </div>
+            </div>
+          </div>
+          <div class="comprar-casa__input-group mb-4">
+            <div class="comprar-casa__label">
+              <div class="bullet"></div>
+              <div>Ingreso Mensual Neto</div>
+            </div>
+            <input type="text" class="form-control"
+              id="comprar-casa-valor-ingreso"
+              aria-label="valor enganche"
+              name="valor-enganche">
+          </div>
+          <div class="confirm-button mt-auto mb-3">
+            <button type="button"
+              class="btn btn-primary btn-lg"
+              onclick="showCalcularCard()">CALCULAR</button>
+          </div>
+        </div>
+        <div id="comprar-terreno__form">
+          <div class="mb-3">
+            <label for="terreno-opcion-simulacion__select"
+              class="form-label">Elige una opcion de
+              simulacion</label>
+            <select id="terreno-opcion-simulacion__select"
+              class="form-select">
+              <option value="costo-terreno" selected>Costo
+                del terreno</option>
+              <option value="monto-que-necesitas">Monto que
+                necesitas</option>
+              <option value="mensualidad-que-quieres">
+                Mensualidad que quieres</option>
+            </select>
+          </div>
+          <div class="card form-card">
+            <div class="card-body">
+              <div class="mb-3">
+                <label id="comprar-terreno-cantidad__label"
+                  for="costo-terreno"
+                  class="form-label">¿Cuánto cuesta el
+                  terreno que quieres?</label>
+                <input type="text" class="form-control"
+                  id="costo-terreno"
+                  placeholder="Ingresa cantidad">
+              </div>
+              <div class="mb-3">
+                <label for="tiempo-para-pagar"
+                  class="form-label">¿Cuánto tiempo
+                  necesitas para pagar</label>
+                <select id="tiempo-para-pagar"
+                  class="form-select">
+                  <option selected>20 años</option>
+                  <option>15 años</option>
+                  <option>10 años</option>
+                  <option>5 años</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="remodelar-casa__form">
+          <div class="mb-3">
+            <label for="remodelar-opcion-simulacion__select"
+              class="form-label">Elige una opcion de
+              simulacion</label>
+            <select id="remodelar-opcion-simulacion__select"
+              class="form-select">
+              <option value="valor-casa" selected>Valor de
+                la casa</option>
+              <option value="monto-que-necesitas">Monto que
+                necesitas</option>
+              <option value="mensualidad-que-quieres">
+                Mensualidad que quieres</option>
+            </select>
+          </div>
+          <div class="card form-card">
+            <div class="card-body">
+              <div class="mb-3">
+                <label id="remodelar-casa-cantidad__label"
+                  for="costo-remoledar"
+                  class="form-label">¿Cuánto cuesta la casa
+                  que quieres remodelar?</label>
+                <input type="text" class="form-control"
+                  id="costo-remoledar"
+                  placeholder="Ingresa cantidad">
+              </div>
+              <div class="mb-3">
+                <label for="tiempo-para-pagar"
+                  class="form-label">¿Cuánto tiempo
+                  necesitas para pagar</label>
+                <select id="tiempo-para-pagar"
+                  class="form-select">
+                  <option selected>20 años</option>
+                  <option>15 años</option>
+                  <option>10 años</option>
+                  <option>5 años</option>
+                </select>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="cambiar-hipoteca__form">
+          <div class="mb-3">
+            <label id="remodelar-casa-cantidad__label"
+              for="costo-remoledar"
+              class="form-label">¿Cuánto debes de tu
+              crédito?</label>
+            <input type="text" class="form-control"
+              id="costo-remoledar"
+              placeholder="Ingresa cantidad">
+          </div>
+          <div class="mb-3">
+            <h5 class="text-muted text-center">&iquest;A
+              cu&aacute;ntos a&ntilde;os quieres pagar?</h5>
+            <div class="mb-4"></div>
+            <div
+              class="d-flex text-muted text-center numero-años-container">
+              <div onclick="updateYearPayments(this, 5)">5
+              </div>
+              <div onclick="updateYearPayments(this, 10)">10
+              </div>
+              <div onclick="updateYearPayments(this, 15)">15
+              </div>
+              <div onclick="updateYearPayments(this, 20)">20
+              </div>
+            </div>
+          </div>
+          <div class="confirm-button mt-auto mb-3">
+            <button type="button"
+              class="btn btn-primary btn-lg"
+              onclick="showCalcularCard()">CALCULAR</button>
+          </div>
+        </div>
+        <div id="obtener-liquidez__form">
+          <div class="mb-3">
+            <label for="liquidez-opcion-simulacion__select"
+              class="form-label">Elige el modo a
+              calcular</label>
+            <select id="obtener-liquidez__select"
+              class="form-select">
+              <option value="valor-casa-liquidez" selected>
+                Valor de la casa</option>
+              <option value="monto-que-necesitas">Monto que
+                necesitas</option>
+              <option value="mensualidad-que-quieres">
+                Mensualidad que quieres</option>
+            </select>
+          </div>
+          <div id="obtener-liquidez__valor-casa"></div>
+          <div id="obtener-liquidez__monto-que-necesitas">
+            <div class="mb-3">
+              <label id="remodelar-casa-cantidad__label"
+                for="costo-remoledar"
+                class="form-label">¿Cuánto
+                necesitas?</label>
+              <input type="text" class="form-control"
+                id="costo-remoledar"
+                placeholder="Ingresa cantidad">
+            </div>
+          </div>
+          <div
+            id="obtener-liquidez__mensualidad-que-quieres">
+            <div class="mb-3">
+              <label id="remodelar-casa-cantidad__label"
+                for="costo-remoledar"
+                class="form-label">¿Que mensualidad quieres
+                pagar?</label>
+              <input type="text" class="form-control"
+                id="costo-remoledar"
+                placeholder="Ingresa cantidad">
+            </div>
+            <div class="mb-3">
+              <label id="remodelar-casa-cantidad__label"
+                for="costo-remoledar"
+                class="form-label">Ingreso mensual</label>
+              <input type="text" class="form-control"
+                id="costo-remoledar"
+                placeholder="Ingresa cantidad">
+            </div>
+          </div>
+          <div class="mb-3">
+            <h5 class="text-muted text-center">&iquest;A
+              cu&aacute;ntos a&ntilde;os quieres pagar?</h5>
+            <div class="mb-4"></div>
+            <div
+              class="d-flex text-muted text-center numero-años-container">
+              <div onclick="updateYearPayments(this, 5)">5
+              </div>
+              <div onclick="updateYearPayments(this, 10)">10
+              </div>
+              <div onclick="updateYearPayments(this, 15)">15
+              </div>
+              <div onclick="updateYearPayments(this, 20)">20
+              </div>
+            </div>
+          </div>
+          <div class="confirm-button mt-auto mb-3">
+            <button type="button"
+              class="btn btn-primary btn-lg"
+              onclick="showCalcularCard()">CALCULAR</button>
+          </div>
+        </div>
+        <div id="calcular__card" style="display: none;">
+          <div class="card">
+            <div class="card-body">
+              <h1 class="card__title">CREDITO CASA
+                TRADICIONAL</h1>
+              <div class="card__te-prestamos">
+                <p class="card__label">Te prestamos:</p>
+                <p id="calcular-card-financiamiento-value"
+                  class="card__value text-blue">$1,620,000
+                </p>
+              </div>
+              <div class="card__item">
+                <div class="card__label">Mensualidad con
+                  seguro y comisiones:</div>
+                <div class="card__value">$18,000</div>
+              </div>
+              <div class="card__item">
+                <div class="card__label">Tipo de tasa:</div>
+                <div class="card__value">Tasa fija anual
+                </div>
+              </div>
+              <div class="card__item">
+                <div class="card__label">Tasa:</div>
+                <div class="card__value text-blue">11.20%
+                </div>
+              </div>
+              <div class="card__item">
+                <div class="card__label">Comision por
+                  apertura:</div>
+                <div class="card__value">1.0%</div>
+              </div>
+              <hr class="card__spacer">
+              <div class="card__item">
+                <div class="card__label">Gastos de
+                  Originacion:</div>
+                <div class="card__value">1.0%</div>
+              </div>
+              <div class="mb-4"></div>
+              <div>
+                <button type="button" class="btn btn-link"
+                  onclick="mostrarAmortizacionModal()">Ver
+                  tabla de Amortizacion</button></div>
+              <div class="mb-4"></div>
+              <div><button type="button"
+                  class="btn btn-light"
+                  onclick="mostarMasInformacionModal()">MAS
+                  INFORMACION</button></div>
+              <div class="mb-4"></div>
+              <div><button type="button"
+                  class="btn btn-primary">PRE APRUEBA TU
+                  HIPOTECA</button></div>
+              <div class="mb-4"></div>
+              <div class="text-muted">*CAT Sin IVA, para
+                fines informativos y de comparación. Fecha
+                de calculo 17 de mayo del 2019. Vigencia de
+                la oferta hasta el 17 de Julio de 2019.
+              </div>
+              <div class="text-muted">*Gastos de
+                originación, estimado para fines
+                informativos y comparativos.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div id="amortizacion__modal" class="modal"
+        tabindex="-1">
+        <div
+          class="modal-dialog modal-dialog-scrollable modal-fullscreen">
+          <div class="modal-content">
+            <div class="modal-header d-flex">
+              <div
+                class="amortizacion-modal-title__container">
+                <div onclick="mostarMasInformacionModal()">
+                  Ver detalles de credito</div>
+                <div class="text-center">
+                  <h5 class="modal-title">CREDITO
+                    TRADICIONAL</h5>
+                  <div class="text-muted">Tabla de
+                    Amortizacion</div>
+                </div>
+                <div class="amortizacion-modal__buttons">
+                  <button id="cofinanciamiento__toggle"
+                    type="button"
+                    class="btn btn-sm text-grey">
+                    <i class="fas fa-print"></i>
+                  </button>
+                  <button id="cofinanciamiento__toggle"
+                    type="button"
+                    class="btn btn-sm text-grey">
+                    <i class="fas fa-file-download"></i>
+                  </button>
+                </div>
+              </div>
+              <div class="modal-close__button">
+                <button type="button" class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"></button>
+              </div>
+            </div>
+            <div class="modal-body">
+              <div class="amortizaio">
+                <table class="table table-hover"
+                  id="amortizacion">
+                  <thead>
+                    <tr>
+                      <th scope="col">PAGO</th>
+                      <th scope="col">SALDO INSOLUTO</th>
+                      <th scope="col">INTER&Eacute;S</th>
+                      <th scope="col">AMORTIZACI&Oacute;N
+                      </th>
+                      <th scope="col">SEGURO DE VIDA Y DANOS
+                      </th>
+                      <th scope="col">COMISI&Oacute;N AUT.
+                        DIF.</th>
+                      <th scope="col">APORTACI&Oacute;N A
+                        CAPITAL</th>
+                      <th scope="col">MENSUALIDAD TOTAL</th>
+                  </thead>
+                  <tbody id="amortizacion__tbody"></tbody>
+                </table>
+              </div>
+            </div>
+            <div
+              class="modal-footer d-flex justify-content-evenly">
+              <button type="button"
+                class="btn btn-secondary"
+                data-bs-dismiss="modal">ENVIAR LOS DATOS A
+                MI CORREO</button>
+              <button type="button" class="btn btn-primary"
+                data-bs-dismiss="modal">PRE APRUEBA TU
+                HIPOTECA</button>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="mas-informacion__modal" class="modal"
+        tabindex="-2" style="padding-left: 0px;">
+        <div
+          class="modal-dialog  modal-dialog-scrollable modal-fullscreen">
+          <div class="modal-content  p-5">
+            <div class="modal-header">
+              <div class="flex-grow-1 mt-3 text-center">
+                <h5 class="modal-title"
+                  id="exampleModalLabel">CRÉDITO TRADICIONAL
+                </h5>
+                <p class="text-secondary">Datos del Crédito
+                </p>
+              </div>
+              <div style="margin-right: 60px;">
+                <div class="col">
+
+                  <i class="bi bi-printer-fill"
+                    onclick="window.print();"></i>
+
+                  <i
+                    class="bi bi-file-earmark-arrow-down-fill"></i>
+                </div>
+
+              </div>
+              <div class="row modal-close__button">
+                <div class="col d-flex justify-content-end">
+                  <button type="button"
+                    class="btn-close mb-5 button__closing"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"></button>
+                </div>
+              </div>
+            </div>
+            <div class="row">
+              <div
+                class="modal-body col-12 col-lg-6 mb-5 gx-5 mt-5">
+                <div class="flex-grow-1 mt-3">
+                  <h6 class="modal-title"
+                    id="exampleModalLabel">Bx+ Casa
+                    Tradicional</h6>
+                  <hr>
+                  <div>
+                  </div>
+                  <table
+                    class="table table-hover table-borderless">
+                    <tbody class=" justify-content-start">
+                      <tr>
+                        <td scope="row">Tasa de interés fija
+                          anual</td>
+                        <td>9.85%</td>
+                      </tr>
+                      <tr>
+                        <td scope="row">CAT</td>
+                        <td>12.7%</td>
+                      </tr>
+                      <tr>
+                        <td scope="row">Comisión por
+                          administración mensual sin IVA
+                        </td>
+                        <td>$349</td>
+                      </tr>
+                      <tr>
+                        <td scope="row">Seguro de danos
+                          mensual</td>
+                        <td>$547</td>
+                      </tr>
+                      <tr>
+                        <td scope="row">Seguro de vida
+                          mensual</td>
+                        <td>$624</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                  <div class="d-block">
+                    <p class="justify-center">*CAT sin IVA
+                      para fines informativos y de
+                      comparación.
+                      Fecha de cálculo <span>17 de julio de
+                        2021</span>.
+                      Vigencia de la oferta hasta el 17 de
+                      Julio de 2021</p>
+                    <button class="btn btn-primary"
+                      onclick="mostrarAmortizacionModal()">Ver
+                      tabla de amortización</button>
+                  </div>
+                </div>
+              </div>
+              <div
+                class="modal-body col-12 col-lg-6 mb-5 gx-5 mt-5">
+                <div class="row">
+                  <div class="flex-grow-1 mt-3">
+                    <h6 class="modal-title"
+                      id="exampleModalLabel">Datos del
+                      crédito</h6>
+                    <hr>
+                    <table
+                      class="table table-hover table-borderless">
+
+                      <tbody>
+                        <tr>
+                          <td scope="row">Crédito Bx+</td>
+                          <td>$1,200,000</td>
+                        </tr>
+                        <tr>
+                          <td scope="row">Valor de la
+                            propiedad</td>
+                          <td>$1,528,000</td>
+                        </tr>
+                        <tr>
+                          <td scope="row">Financiamiento
+                            Real</td>
+                          <td>79%</td>
+                        </tr>
+                        <tr>
+                          <td scope="row">Mensualidad</td>
+                          <td>$20,000</td>
+                        </tr>
+                        <tr>
+                          <td scope="row">Plazo</td>
+                          <td>20 anos</td>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+
+                </div>
+                <div class="row">
+                  <div class="flex-grow-1 mt-3">
+                    <h6 class="modal-title"
+                      id="exampleModalLabel">Gastos de
+                      originación</h6>
+                    <hr>
+                    <table
+                      class="table table-hover table-borderless">
+
+                      <tbody>
+                        <tr>
+                          <td scope="row">Gastos notariales
+                            (6%)</td>
+                          <td>$168,080</td>
+                        </tr>
+                        <tr>
+                          <td scope="row">Gastos de </td>
+                          <td>$750</td>
+                        </tr>
+                        <tr>
+                          <td scope="row">Comisión por
+                            administración mensual sin IVA
+                          </td>
+                          <td>$4,431</td>
+                        </tr>
+                        <tr>
+                          <td scope="row">Seguro de danos
+                            mensual</td>
+                          <td>$12,000</td>
+                        </tr>
+                        <tr>
+                          <td scope="row">Seguro de vida
+                            mensual</td>
+                          <td>$200,000</td>
+                        </tr>
+                        <tr>
+                          <td scope="row">Seguro de vida
+                            mensual</td>
+                          <td>$385,261</td>
+                        </tr>
+                      </tbody>
+                    </table>
+
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div
+              class="modal-footerd-flex justify-content-center"
+              style="padding: 40px 20px;">
+              <div class="d-flex justify-content-center"
+                style="padding: 40px 20px;">
+                <button type="button"
+                  class="btn btn-light  text-secondary shadow-sm  rounded col-4"
+                  data-bs-target="#masInformacion">
+                  ENVIAR LOS DATOS A MI CORREO
+                </button>
+                <div class="col-1"></div>
+                <button type="button"
+                  class="btn btn-primary col-4"
+                  href="./privacidadA.html"
+                  id="preApruebaHipoteca"> PRE
+                  APRUEBA TU HIPOTECA
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div id="estimar-valor__modal" class="modal"
+        tabindex="-2" style="padding-left: 0px;">
+        <div
+          class="modal-dialog modal-dialog-scrollable modal-fullscreen">
+          <div class="modal-content">
+            <div id="estimar-valor__form">
+              <div class="modal-header">
+                <h5 class="modal-title text-center"
+                  id="exampleModalLabel"
+                  style="width: 100%;">
+                  ¿Qué
+                  tipo de propiedad habitacional es?</h5>
+                <button type="button"
+                  class="btn-close mb-5 button__closing"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"> </button>
+              </div>
+              <div class="modal-body">
+                <div class="row">
+                  <div class="col-sm-6 ">
+                    <div
+                      class="card  modal-card shadow-sm p-2 mb-3 bg-white rounded"
+                      id="card__selecccion--house"
+                      onclick="changeImage()">
+                      <img src="../img/house-grey.jpeg"
+                        id="image__house"
+                        class="img-fluid modal-image__house "
+                        alt="imagen comprar casa">
+
+                      <div class="card-body">
+                        <p class="modal-card__link">
+                          CASA</p>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-sm-6">
+                    <div
+                      class="card modal-card shadow-sm p-2 mb-3 bg-white rounded"
+                      id="card__selecccion--building"
+                      onclick="changeImage()">
+                      <img src="../img/building-grey.jpeg"
+                        class="img-fluid modal-image "
+                        id="image__building"
+                        alt="imagen comprar terreno">
+                      <div class="card-body">
+                        <p class="modal-card__link">
+                          DEPARTAMENTO</p>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+
+                <div class="container container-fluid ">
+                  <div
+                    class="d-flex row mt-3 d-flex justify-content-center">
+                    <h5 class="text-center">¿Cuál es el
+                      código
+                      postal?</h5>
+                    <input class="form-control me-2  "
+                      type="search" placeholder="C.P."
+                      style="width: 30%;">
+
+
+                  </div>
+                  <div class="multicollapse mt-3">
+                    <h5 class="text-center">Superficie
+                      Construida</h5>
+                    <form action="Superficie"
+                      class="d-flex justify-content-center">
+                      <input class="form-control me-2"
+                        type="search" placeholder="m2"
+                        style="width: 30%;">
+                    </form>
+                    <p class="text-muted text-center">La
+                      superficie minima son 40m2</p>
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <!-- Toogle to Obtener recomendacion-->
+                <button class="btn btn-primary"
+                  id="obtener-recomendacion"
+                  style="width: 100%;"
+                  onclick="obtenerRecomendacion()">Obtener
+                  Recomendación</button>
+              </div>
+            </div>
+
+            <div id="estimar-valor__recomendacion">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title"
+                    id="exampleModalLabel">
+                    De acuerdo a la información que nos
+                    proporcionaste te sugerimos elegir entre
+                    los siguientes valores</h5>
+                  <button type="button"
+                    class="btn-close mb-5 button__closing"
+                    data-bs-dismiss="modal"
+                    aria-label="Close"> </button>
+                </div>
+                <div class="modal-body">
+                  <table class="table  table-hover">
+                    <tbody>
+                      <tr>
+                        <td style="text-align: center;"
+                          scope="row">1</td>
+                      </tr>
+                      <tr>
+                        <td style="text-align: center;"
+                          scope="row">2
+                        </td>
+                      </tr>
+                      <tr>
+                        <td style="text-align: center;"
+                          scope="row">3
+                        </td>
+                      </tr>
+                      <tr>
+                        <td style="text-align: center;"
+                          scope="row">4
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <!-- Toogle to first dialog, `data-bs-dismiss` attribute can be omitted - clicking on link will close dialog anyway -->
+                <div class="modal-footer">
+                  <a class="btn btn-primary "
+                    style="width: 100%;" aria-label="Close"
+                    role="button"
+                    data-bs-dismiss="modal">Confirmar</a>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+    <footer class="footer py-3 bg-light">
+      <div class="container text-center">
+        <span class="text-muted">Go4it Todos los derechos
+          reservados</span>
+      </div>
+    </footer>
+  </div>
+  <div class="d-none d-lg-block d-xl-block d-xxl-block ">
+    <header class="header border-bottom mb-2 ">
+      <nav
+        class="container-xxl navbar navbar-expand-lg navbar-light bg-white">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="./index.html">
+            <img src="../images/logo.png"
+              class="navbar-logo ms-2" alt="logo">
+          </a>
+          <button class="navbar-toggler" type="button"
+            data-bs-toggle="collapse"
+            data-bs-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false"
+            aria-label="Toggle navigation">
+            <i class="bi bi-list"></i>
+          </button>
+          <div
+            class="collapse navbar-collapse justify-content-end"
+            id="navbarNav">
+            <ul class="navbar-nav d-flex ">
+              <li class="nav-item">
+                <a class="nav-link nav-link__header"
+                  aria-current="page"
+                  href="./index.html">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link nav-link__header"
+                  href="#">Simulador</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link nav-link__header"
+                  href="#">Pre-Aprobador</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link nav-link__header"
+                  href="#">Agenda tu Cita</a>
+              </li>
+              <li>
+                <a class="btn btn-outline-secondary ms-2"
+                  href="./inicioDeSesion.html"
+                  role="button">Iniciar
+                  Sesi&oacute;n
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <div class="container container-fluid">
+      <div class="d-flex justify-content-center">
+        <h1 class="title text-secondary p-2">
+          SIMULADOR DE
+          <span class="text-dark">CR&Eacute;DITO
+            HIPOTECARIO.</span>
+        </h1>
+      </div>
+      <div class="container container-fluid d-flex">
+        <!-- Seccion izquierda -->
+        <section class="col col-6 p-4">
+          <!-- Menu Version Desktop -->
+          <div id="menu_desktop">
+            <p>Selecciona el fin del cr&eacute;dito</p>
+            <div class="btn-group menu_secundario"
+              role="group"
+              aria-label="Basic outlined example">
+              <button id="boton-comprar-casa" type="button"
+                class="btn btn-default border-end menu_button"
+                aria-current="page"
+                onclick="handleFinDelCreditoClick('comprar-casa')">
+                <span class="letras">
+                  COMPRAR UNA CASA
+                </span></button>
+              <button type="button"
+                class="btn btn-default border-end menu_button"
+                onclick="handleFinDelCreditoClick('comprar-terreno')">
+                <span class="letras">
+                  ELEGIR UN TERRENO
+              </button>
+              </span><button type="button"
+                class="btn btn-default border-end menu_button"
+                onclick="handleFinDelCreditoClick('obtener-liquidez')">
+                <span class="letras">
+                  OBTENER LIQUIDEZ
+                </span></button>
+              <button type="button"
+                class="btn btn-default border-end menu_button"
+                onclick="handleFinDelCreditoClick('refinanciar')">
+                <span class="letras">
+                  REFINANCIAR
+                </span></button>
+            </div>
+          </div>
+          <hr>
+          <!-- Menu Modo A Calcular -->
+          <div>
+            <p class="casa">Elige el modo para calcular</p>
+            <div class="btn-group menu_secundario"
+              role="group"
+              aria-label="Basic outlined example">
+              <button type="button"
+                class="btn btn-default border-end menu_button "
+                aria-current="page"
+                onclick="handleModoACalcularClick('valor-propiedad')">
+                <span class="letras">
+                  VALOR DEL INMUEBLE
+                </span>
+              </button>
+              <button type="button" class="btn btn-default 
+         border-end menu_button "
+                onclick="handleModoACalcularClick('valor-mensualidad')">
+                <span class="letras">
+                  MENSUALIDAD
+                </span></button>
+              <button type="button" class="btn btn-default 
+        border-end menu_button "
+                onclick="handleModoACalcularClick('ingreso-mensual')">
+                <span class="letras">
+                  INGRESO MENSUAL
+                </span></button>
+            </div>
+          </div>
+          <h4 class="subtitle text-secondary m-3 d-flex 
+          justify-content-center"
+            id="titulo-seccion-izquierda">
+            Valor del inmueble</h4>
+            <div style="width: 100%; display: flex; justify-content: center;">
+              <input type="text" name="input__casa" id="valor-casa" class="row-5 col-4">
+            </div>
+            <div
+            class="justify-content-center p-2 d-flex">
+            <p class="me-3">No conoces el valor?
+            </p>
+            <p><a type="button"
+                class="text-decoration-none"
+                data-bs-toggle="modal" href="#modal"
+                role="button">
+                Estimar Valor
+              </a></p>
+          </div>
+          <div class="slider-container enganche-financiamiento-slider financiamiento-slider__container-desktop" style="padding: 0 17px;">
+            <input type="range" class="form-range slider" id="comprar-casa-enganche-slider-desktop" value="0">
+          </div>
+          <div class="slider-container enganche-financiamiento-slider enganche-financiamiento-slider--range cofinanciamiento-slider__container-desktop"
+            style="display: none;">
+            <input type="range" class="form-range slider"
+              id="comprar-casa-cofinanciamiento-slider-desktop"
+              value="0">
+          </div>
+          <div class="d-flex justify-content-between text-muted min-max-container mb-4">
+            <div>MIN 500,000</div>
+            <div>MAX 10,000,000</div>
+          </div>
+            <!--Modal valuar propiedad-->
+            <div class="modal fade" id="modal"
+              aria-hidden="true" aria-labelledby="..."
+              tabindex="-1">
+              <div
+                class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title"
+                      id="exampleModalLabel">
+                      &iquest;Qu&eacute;
+                      tipo de propiedad habitacional
+                      es&#63;</h5>
+                    <button type="button"
+                      class="btn-close mb-5 button__closing"
+                      data-bs-dismiss="modal"
+                      aria-label="Close"></button>
+                  </div>
+                  <div class="modal-body">
+                    <div class="row">
+                      <div class="col-sm-6 ">
+                        <div class="card  modal-card shadow-sm 
+                          p-2 mb-3 bg-white rounded"
+                          id="card__selecccion--house"
+                          onclick="changeImage()">
+                          <img
+                            src="../images/house-grey.jpeg"
+                            id="image__house"
+                            class="img-fluid modal-image__house "
+                            alt="imagen comprar casa">
+                          <div class="card-body">
+                            <p class="modal-card__link">
+                              CASA</p>
+                          </div>
+                        </div>
+                      </div>
+                      <div class="col-sm-6">
+                        <div class="card modal-card shadow-sm p-2 
+                          mb-3 bg-white rounded"
+                          id="card__selecccion--building"
+                          onclick="changeImage()">
+                          <img
+                            src="../images/building-grey.jpeg"
+                            class="img-fluid modal-image "
+                            id="image__building"
+                            alt="imagen comprar terreno">
+                          <div class="card-body">
+                            <p class="modal-card__link">
+                              DEPARTAMENTO</p>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                    <div class="container container-fluid ">
+                      <div
+                        class=" row mt-3 d-flex justify-content-center">
+                        <h5>&iquest;Cu&aacute;l es el
+                          c&oacute;digo
+                          postal&#63;</h5>
+                        <form action="CP"
+                          class="col-md-3 ms-auto ">
+                          <input class="form-control me-2  "
+                            type="search" placeholder="C.P."
+                            style="width: 30%;">
+                          </input>
+                        </form>
+                      </div>
+                      <div class="multicollapse mt-3">
+                        <h5>Superficie Construida</h5>
+                        <form action="Superficie"
+                          class="d-flex justify-content-center">
+                          <input class="form-control me-2"
+                            type="search" placeholder="m2"
+                            style="width: 30%;">
+                        </form>
+                        <p>La superficie minima son
+                          40m2</p>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="modal-footer">
+                    <!-- Toogle to Obtener recomendacion-->
+                    <button class="btn btn-primary"
+                      id="obtener-recomendacion"
+                      data-bs-target="#modal2"
+                      data-bs-toggle="modal"
+                      data-bs-dismiss="modal"
+                      style="width: 100%;"
+                      onclick="verificationOptions()">
+                      Obtener
+                      Recomendaci&oacute;n</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Modal de Opciones de avaluo -->
+            <div class="modal fade" id="modal2"
+              aria-hidden="true" aria-labelledby="..."
+              tabindex="-1">
+              <div
+                class="modal-dialog modal-dialog-centered">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <h5 class="modal-title"
+                      id="exampleModalLabel">
+                      De acuerdo a la
+                      informaci&oacute;n que nos
+                      proporcionaste te sugerimos
+                      elegir entre
+                      los siguientes valores</h5>
+                    <button type="button"
+                      class="btn-close mb-5 button__closing"
+                      data-bs-dismiss="modal"
+                      aria-label="Close"> </button>
+                  </div>
+                  <div class="modal-body">
+                    <table class="table table-hover">
+                      <tbody>
+                        <tr>
+                          <td scope="row">1</td>
+                        </tr>
+                        <tr>
+                          <td scope="row">2</th>
+                        </tr>
+                        <tr>
+                          <td scope="row">3</th>
+                        </tr>
+                        <tr>
+                          <td scope="row">4</th>
+                        </tr>
+                      </tbody>
+                    </table>
+                  </div>
+                  <!-- Toogle to first dialog, `data-bs-dismiss` attribute can be omitted - clicking on link will close dialog anyway -->
+                  <div class="modal-footer">
+                    <a class="btn btn-primary "
+                      style="width: 100%;"
+                      aria-label="Close" role="button"
+                      data-bs-dismiss="modal"
+                      aria-label="Close">Confirmar</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- Indicadores de los rangos -->
+            <div class="row">
+              <div class="col-12 col-lg-6 mb-3">
+                <label
+                  class="enganche bb-input-sdmfcfdmlabel">
+                  <span class="bullet"></span>
+                  Enganche
+                </label>
+                <div class="row">
+                  <div class="col-6">
+                    <input name="user_name"
+                      id="porcentajeEnganche"
+                      placeholder="20%"
+                      class="input_information text-end"
+                      style="width: 100%">
+                  </div>
+                  <div class="col-6">
+                    <input id="valorEnganche" type="text"
+                      placeholder="10%" value="10"
+                      class="input_information text-end"
+                      style="width: 100%">
+                  </div>
+                </div>
+              </div>
+              <div class="col-12 col-lg-6 mb-3">
+                <label class="bb-input-label">
+                  <span class="bullet--light"></span>
+                  Financiamiento
+                </label>
+                <div class="row">
+                  <div class="col-6">
+                    <input type="text"
+                      id="porcentajeFinanciamiento"
+                      value="80%"
+                      class="input_information text-end"
+                      style="width: 100%">
+                  </div>
+                  <div class="col-6">
+                    <input type="text"
+                      id="valorFinanciamiento"
+                      placeholder="$1620000"
+                      class="input_information text-end formato-moneda"
+                      style="width: 100%">
+                  </div>
+                </div>
+                <div class="">
+                  <div
+                    class="d-flex p-2 justify-content-end align-items-center"
+                    id="botonCofi" onclick="toggleCofinanciamiento()">
+                    <i class="bi bi-plus-circle m-1"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#collapseExample"></i>
+                    <p class="m-1 collapse.show"
+                      data-bs-toggle="collapse"
+                      data-bs-target="#collapseExample">
+                      Agregar
+                      Cofinanciamiento</p></i>
+                    <input type="hidden"
+                      id="isCofinanciamiento" value="false">
+                  </div>
+                  <div>
+                    <div class="collapse"
+                      id="collapseExample">
+                      <div class="d-flex p-2">
+                        <i
+                          class="bi bi-dash-circle m-1 collapse"></i>
+                        <label
+                          class="enganche bb-input-sdmfcfdmlabel">
+                          <span class="bullet--grey"></span>
+                          Cofinanciamiento
+                        </label>
+                      </div>
+                      <div>
+                        <select
+                          class="form-select collapse.show "
+                          aria-label="Default select example">
+                          <option selected>Infonavit
+                          </option>
+                          <option value="1">Cofinavit
+                          </option>
+                          <option value="2">Otro
+                          </option>
+                        </select>
+                        <input
+                          id="porcentajeCofinanciamiento"
+                          value="50%"
+                          class="input_information text-end"
+                          style="width: 100%">
+                        <input id="valorCofinanciamiento"
+                          value="190000"
+                          class="input_information text-end"
+                          style="width: 100%;">
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          
+          <div class="mb-4"></div>
+          <h5 class="text-muted text-center">&iquest;A
+            cu&aacute;ntos a&ntilde;os quieres pagar?</h5>
+          <div class="mb-4"></div>
+          <div
+            class="d-flex text-muted text-center numero-años-container">
+            <div>5</div>
+            <div>10</div>
+            <div>15</div>
+            <div>20</div>
+          </div>
+          <div class="mb-4"></div>
+          Ingreso Mensual Neto
+          </label>
+          <div>
+            <input type="text" placeholder="$0.00"
+              class="input_information formato-moneda"
+              style="width: 100%;" id="ingresoMensual">
+          </div>
+
+        </section>
+        <!-- Seccion derecha-->
+        <section class="col col-6 p-4 mt-5">
+          <div class="mb-4"></div>
+          <div class="card mb-4 p-3 bs-card  shadow-sm 
+           bg-white rounded">
+            <div class="title mb-2">
+              <h3>CR&Eacute;DITO CASA TRADICIONAL</h3>
+            </div>
+            <h6 class="text-grey text-center">Te prestamos:
+            </h6>
+            <h3 id="te-prestamos" class="text-center text-blue">$1,620,000
+            </h3>
+            <div class="mb-4"></div>
+            <div class="card-label__container d-flex">
+              <div
+                class="card-label__left-column text-grey">
+                Mensualidad con seguro y comisiones:</div>
+              <div
+                class="card-label__right-column text-end text-muted">
+                $16,800</div>
+            </div>
+            <div class="card-label__container d-flex">
+              <div
+                class="card-label__left-column text-grey">
+                Tipo de tasa:</div>
+              <div
+                class="card-label__right-column text-end text-muted">
+                Tasa fija anual</div>
+            </div>
+            <div class="card-label__container d-flex">
+              <div
+                class="card-label__left-column text-grey">
+                Tasa:</div>
+              <div
+                class="card-label__right-column text-end text-blue">
+                $11.20%</div>
+            </div>
+            <div class="card-label__container d-flex">
+              <div
+                class="card-label__left-column text-grey">
+                *CAT:</div>
+              <div
+                class="card-label__right-column text-end text-muted">
+                $16,800</div>
+            </div>
+            <div class="card-label__container d-flex">
+              <div
+                class="card-label__left-column text-grey">
+                Comision por apertura:</div>
+              <div
+                class="card-label__right-column text-end text-muted">
+                $385,261</div>
+            </div>
+            <hr>
+            <div class="card-label__container d-flex">
+              <div
+                class="card-label__left-column text-grey">
+                Gastos de Originaci&oacute;n:</div>
+              <div
+                class="card-label__right-column text-end text-muted">
+                1%</div>
+            </div>
+            <div class="mb-4"></div>
+            <a class="mb-4 text-center" href="#">Ver tabla
+              de
+              amortizacion</a>
+            <button type="button"
+              class="btn btn-light mb-4">M&Aacute;S
+              INFORMACI&Oacute;N</button>
+            <button type="button"
+              class="btn btn-primary">PRE
+              APRUEBA TU HIPOTECA</button>
+          </div>
+        </section>
+      </div>
+    </div>
+    <footer class="footer d-flex justify-content-center">
+      <div class="text-center">
+        <span>Copyright&copy; 2020 - go4it - Todos los
+          derechos reservados</span>
+      </div>
+    </footer>
+
+  </div>
+  <script
+    src="../libraries/bootstrap-5.0.0-beta3-dist/js/bootstrap.bundle.min.js">
+  </script>
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/11.0.2/bootstrap-slider.min.js"
+    integrity="sha512-f0VlzJbcEB6KiW8ZVtL+5HWPDyW1+nJEjguZ5IVnSQkvZbwBt2RfCBY0CBO1PsMAqxxrG4Di6TfsCPP3ZRwKpA=="
+    crossorigin="anonymous"></script>
+  <script src="../libraries/jquery/jquery-3.6.0.min.js">
+  </script>
+  <script src="../js/funciones_animaciones.js"></script>
+  <script src="../js/hipotecario.js"></script>
+  <script src="../js/funciones_calculos.js"></script>
+  <script src="../js/nueva_version.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet"
+    href="../libraries/bootstrap-5.0.0-beta3-dist/css/bootstrap.min.css">
+  <link rel="stylesheet"
+    href="../libraries/bootstrap-icons-1.4.1/bootstrap-icons.css">
+  <link rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/11.0.2/css/bootstrap-slider.min.css"
+    integrity="sha512-3q8fi8M0VS+X/3n64Ndpp6Bit7oXSiyCnzmlx6IDBLGlY5euFySyJ46RUlqIVs0DPCGOypqP8IRk/EyPvU28mQ=="
+    crossorigin="anonymous" />
+  <link rel="stylesheet" href="../css/main.css">
+</head>
+
+<body class="d-flex flex-column h-100">
+  <nav class="navbar navbar-light">
+    <div class="container-fluid">
+      <a class="navbar-brand navbar__link" href="#">
+        <img src="../img/logo.png" alt="" height="40">
+      </a>
+      <div class="d-flex">
+        <button class="btn" type="submit"><i
+            class="bi bi-list"></i></button>
+      </div>
+    </div>
+  </nav>
+  <div class="home container flex-grow-1 d-flex flex-column">
+    <div class="title mb-4">
+      <h3 class="text-dark"><span
+          class="text-muted">SIMULADOR DE</span> CREDITO
+        HIPTECARIO</h3>
+    </div>
+    <h6 class="text-muted text-center">Valor del inmueble</h6>
+    <div class="card mb-4">
+      <div class="card-body" id="valor-propiedad-text"></div>
+    </div>
+    <div class="slider-container">
+      <input type="range" class="form-range slider"
+        id="enganche-slider" value="0">
+    </div>
+    <div class="mb-4"></div>
+    <div class="comprar-casa__input-group">
+      <div class="comprar-casa__label comprar-casa__label--dark">
+        <div class="bullet"></div>
+        <div>Enganche</div>
+      </div>
+      <input type="text" class="form-control mb-3" aria-label="porcentaje enganche" name="porcentaje-enganche">
+      <input type="text" class="form-control" aria-label="valor enganche" name="valor-enganche">
+    </div>
+    <div class="mb-4"></div>
+    <div class="comprar-casa__input-group">
+      <div class="comprar-casa__label">
+        <div class="bullet"></div>
+        <div>Financiamiento</div>
+      </div>
+      <input type="text" class="form-control mb-3" aria-label="porcentaje enganche" name="porcentaje-enganche">
+      <input type="text" class="form-control" aria-label="valor enganche" name="valor-enganche">
+    </div>
+    <div class="mb-4"></div>
+    <h5 class="text-muted text-center">&iquest;A cu&aacute;ntos a&ntilde;os quieres pagar?</h5>
+    <div class="mb-4"></div>
+    <div class="d-flex text-muted text-center numero-años-container">
+      <div>5</div>
+      <div>10</div>
+      <div>15</div>
+      <div>20</div>
+    </div>
+    <div class="mb-4"></div>
+    <div class="slider-container">
+      <input type="range" class="form-range slider"
+        id="numero-pagos-slider" value="0">
+    </div>
+    <div class="mb-4"></div>
+    <div class="comprar-casa__input-group">
+      <div class="comprar-casa__label comprar-casa__label--dark">
+        <div class="bullet"></div>
+        <div>Mensualidad</div>
+      </div>
+      <input type="text" class="form-control mb-3" aria-label="porcentaje enganche" name="porcentaje-enganche">
+      <input type="text" class="form-control" aria-label="valor enganche" name="valor-enganche">
+    </div>
+    <div class="mb-4"></div>
+    <div class="comprar-casa__input-group">
+      <div class="comprar-casa__label">
+        <div class="bullet"></div>
+        <div>Ingreso Mensual Neto</div>
+      </div>
+      <input type="text" class="form-control mb-3" aria-label="porcentaje enganche" name="porcentaje-enganche">
+    </div>
+    <div class="mb-4"></div>
+    <div class="card mb-4 p-3 bs-card  shadow-sm 
+    bg-white rounded">
+      <div class="title mb-2">
+        <h3>CR&Eacute;DITO CASA  TRADICIONAL</h3>
+      </div>
+      <h6 class="text-grey text-center">Te prestamos:</h6>
+      <h3 class="text-center text-blue">$1,620,000</h3>
+      <div class="mb-4"></div>
+      <div class="card-label__container d-flex">
+        <div class="card-label__left-column text-grey">Mensualidad con seguro y comisiones:</div>
+        <div class="card-label__right-column text-end text-muted">$16,800</div>
+      </div>
+      <div class="card-label__container d-flex">
+        <div class="card-label__left-column text-grey">Tipo de tasa:</div>
+        <div class="card-label__right-column text-end text-muted">Tasa fija anual</div>
+      </div>
+      <div class="card-label__container d-flex">
+        <div class="card-label__left-column text-grey">Tasa:</div>
+        <div class="card-label__right-column text-end text-blue">$11.20%</div>
+      </div>
+      <div class="card-label__container d-flex">
+        <div class="card-label__left-column text-grey">*CAT:</div>
+        <div class="card-label__right-column text-end text-muted">$16,800</div>
+      </div>
+      <div class="card-label__container d-flex">
+        <div class="card-label__left-column text-grey">Comision por apertura:</div>
+        <div class="card-label__right-column text-end text-muted">$385,261</div>
+      </div>
+      <hr>
+      <div class="card-label__container d-flex">
+        <div class="card-label__left-column text-grey">Gastos de Originaci&oacute;n:</div>
+        <div class="card-label__right-column text-end text-muted">1%</div>
+      </div>
+      <div class="mb-4"></div>
+      <a class="mb-4 text-center" href="#">Ver tabla de amortizacion</a>
+      <button type="button" class="btn btn-light mb-4">M&Aacute;S INFORMACI&Oacute;N</button>
+      <button type="button" class="btn btn-primary">PRE APRUEBA TU HIPOTECA</button>
+    </div>
+  </div>
+  <footer class="footer py-3 bg-light">
+    <div class="container text-center">
+      <span class="text-muted">Go4it Todos los derechos reservados</span>
+    </div>
+  </footer>
+  <script
+    src="../libraries/bootstrap-5.0.0-beta3-dist/js/bootstrap.bundle.min.js">
+  </script>
+  <script
+    src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-slider/11.0.2/bootstrap-slider.min.js"
+    integrity="sha512-f0VlzJbcEB6KiW8ZVtL+5HWPDyW1+nJEjguZ5IVnSQkvZbwBt2RfCBY0CBO1PsMAqxxrG4Di6TfsCPP3ZRwKpA=="
+    crossorigin="anonymous"></script>
+  <script src="../libraries/jquery/jquery-3.6.0.min.js">
+  </script>
+  <script src="../js/comprar_casa.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,360 @@
+html {
+  height: 100%;
+}
+.navbar {
+  border-bottom: 1px solid #e7e7e7;
+  margin-bottom: 20px;
+}
+.navbar__link {
+  margin: 0;
+  padding: 0;
+}
+.title {
+  text-align: center;
+  letter-spacing: .75px;
+}
+.cards-container {
+  padding: 0 20px;
+}
+.card {
+  margin: 0 10px;
+}
+.card__image {
+  height: 60px;
+  margin-top: 17px;
+}
+.card-title {
+  margin: 0;
+  font-size: 10px;
+}
+.card-body {
+  text-align: center;
+}
+.confirm-button {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0 17px;
+}
+
+.confirm-button button {
+  flex: 1;
+  margin: 20px 0;
+  padding: 20px 0;
+}
+
+.footer {
+  border-top: 1px solid #e7e7e7;
+}
+
+#valor-propiedad-text, #main-form-valor-propiedad {
+  font-weight: 500;
+  font-size: 25px;
+  padding: 10px;
+}
+
+.slider-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 17px;
+}
+
+.slider-container input[type="range"] {
+  flex: 1;
+}
+
+.slider.slider-horizontal {
+  width: 100%;
+  margin: 0 17px;
+}
+
+.slider-handle {
+  width: 35px;
+  height: 35px;
+  top: -8px;
+  background-color: #69a3e0;
+  background-image: none;
+}
+
+.slider-track .slider-selection {
+  background-color: #69a3e0;
+}
+
+.slider-track .slider-selection {
+  background-image: none;
+}
+
+.enganche-financiamiento-slider .slider-handle {
+  background-color: #fff;
+  border: 1px solid #e7e7e7;
+}
+
+.enganche-financiamiento-slider .slider-track .slider-selection {
+  background-color: #2f669e;
+}
+
+.enganche-financiamiento-slider .slider-track .slider-track-high {
+  background-color: #69a3e0;
+}
+
+.enganche-financiamiento-slider.enganche-financiamiento-slider--range .slider-track .slider-track-low {
+  background-color: #2f669e;
+}
+
+.enganche-financiamiento-slider.enganche-financiamiento-slider--range .slider-track .slider-selection {
+  background-color: #69a3e0;
+}
+
+.enganche-financiamiento-slider.enganche-financiamiento-slider--range .slider-track .slider-track-high {
+  background-color: #788ca6;
+}
+
+.min-max-container {
+  font-size: 14px;
+  padding: 0 34px;
+}
+
+.conoce-valor-inmueble-container {
+  color: #5c92ea;
+  margin: 30px 0;
+  padding: 16px;
+}
+.conoce-valor-inmueble-container > div {
+  flex: 1;
+}
+.conocer-valor-inmuebe__title {
+  font-weight: 600;
+  font-size: 16px;
+  margin-top: 6px;
+}
+.conocer-valor-inmuebe__subtitle {
+  font-size: 14px;
+}
+.conocer-valor-inmuebe__button {
+  margin-top: 10px;
+  font-size: 14px;
+  border-radius: 30px;
+  padding: 16px 14px;
+  width: 100%;
+  background-color: #5c92ea;
+  border-color: #5c92ea;
+}
+
+.bullet {
+  width: 30px;
+  height: 30px;
+  border-radius: 30px;
+  background-color: #69a3e0;
+  margin-right: 10px;
+}
+
+.comprar-casa__input-group {
+  padding: 0 17px;
+}
+
+.comprar-casa__label {
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  margin-bottom: 16px;
+  font-size: 20px;
+  color: #69a3e0;
+}
+.comprar-casa__input-group input,
+.comprar-casa__input-group select {
+  max-width: 60%;
+}
+.comprar-casa__label--dark {
+  color: #2f669e;
+}
+.comprar-casa__label--dark .bullet {
+  background-color: #2f669e;
+  margin-right: 10px;
+}
+.comprar-casa__label--grey {
+  color: #788ca6;
+}
+.comprar-casa__label--grey .bullet {
+  background-color: #788ca6;
+  margin-right: 10px;
+}
+
+.numero-años-container {
+  width: 100%;
+  font-size: 20px;
+  padding: 0 17px;
+}
+.numero-años-container  div {
+  flex: 1;
+  padding: 10px;
+  background-color: #e7e7e7;
+  border-right: 1px solid #adb5bd;
+  cursor: pointer;
+}
+.numero-años-container  div:hover {
+  background-color: #adb5bd;
+  color: #fff;
+}
+.numero-años-container  div:last-child {
+  border-right: none;
+}
+.text-blue {
+  color: #5c92ea;
+}
+
+.text-grey {
+  color: #adb5bd!important;
+}
+
+.card-label__container {
+  padding: 0 17px;
+  margin-bottom: 10px;
+}
+
+.card-label__container div {
+  flex: 1;
+}
+
+#main-form,
+#comprar-casa__form,
+#comprar-terreno__form,
+#remodelar-casa__form,
+#cambiar-hipoteca__form,
+#obtener-liquidez__form,
+#valor-proiedad-container,
+#comprar-casa-monto-que-necesitas,
+#comprar-casa-mensualidad-que-necesitas,
+#obtener-liquidez__monto-que-necesitas,
+#obtener-liquidez__mensualidad-que-quieres,
+#estimar-valor__recomendacion {
+  display: none;
+}
+
+.btn--round {
+  border-radius: 30px;
+}
+
+/* CALCULAR CARD */
+#calcular__card .card__title {
+  font-size: 20px;
+}
+
+#calcular__card .card__item {
+  width: 100%;
+  display: flex;
+}
+
+#calcular__card .card__item .card__label {
+  flex: 1;
+  text-align: right;
+  margin-right: 10px;
+}
+
+#calcular__card .card__item .card__value {
+  flex: 1;
+  text-align: left;
+  margin-left: 10px;
+}
+
+#calcular__card .card__label {
+  color: #6c757d;
+}
+
+#calcular__card .card__te-prestamos .card__value {
+  font-size: 20px;
+  font-weight: 500;
+}
+
+#calcular__card button {
+  width: 100%;
+}
+
+.amortizacion-modal-title__container {
+  display: flex;
+  flex: 1;
+  justify-content: space-between;
+  margin-right: 60px;
+}
+
+.amortizacion-modal__buttons {
+  margin-right: 6px;
+}
+
+.modal-close__button {
+  position: absolute;
+  right: 20px;
+  top:  20px;
+}
+
+
+.modal-card {
+  display: flex;
+  align-items: center;
+  min-width: 120px;
+  max-width: 170px;
+  height: 180px;
+  margin: 20px auto;
+  cursor: pointer;
+}
+
+.modal-card:hover {
+  box-shadow: 0 4px 8px 0 rgba(152, 162, 179, 0.15), 0 2px 2px -1px rgba(152, 162, 179, 0.3);
+  transform: translateY(-2px);
+}
+
+
+
+.modal-image {
+  height: 70%;
+  margin: 5px auto;
+}
+
+
+.modal-image__house {
+  height: 70%;
+  padding: 20px;
+  margin: 10px auto;
+
+}
+.menu_button:hover {
+  background-color: #28548c;
+  color: #fff;
+}
+
+.bullet {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: #2f669e;
+  margin-right: 6px;
+  display: inline-block;
+}
+
+.bullet--light {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  margin-right: 6px;
+  display: inline-block;
+  background: #60a1e7;
+}
+
+.bullet--grey {
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  margin-right: 6px;
+  display: inline-block;
+  background: grey;
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  text-align: center;
+  padding: 20px;
+  color: #fff;
+  background-color: #3d556f;
+}
